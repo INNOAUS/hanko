@@ -205,7 +205,8 @@ func NewPublicRouter(cfg *config.Config, persister persistence.Persister, promet
 		webauthnCredentials.DELETE("/:id", webauthnHandler.DeleteCredential)
 	}
 
-	if !cfg.MFA.Enabled && cfg.Email.Enabled && cfg.Email.UseForAuthentication {
+	// 이메일 인증(패스코드) 라우트: MFA 비활성 시 로그인용, MFA 활성 시에도 회원가입 이메일 검증(require_verification)용으로 필요
+	if cfg.Email.Enabled && cfg.Email.UseForAuthentication {
 		passcodeHandler, err := NewPasscodeHandler(cfg, persister, sessionManager, mailer, auditLogger)
 		if err != nil {
 			panic(fmt.Errorf("failed to create public passcode handler: %w", err))

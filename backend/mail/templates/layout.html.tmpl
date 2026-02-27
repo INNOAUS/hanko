@@ -1,24 +1,53 @@
 {{define "layout"}}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
     <title>{{.Subject}}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
 </head>
-<body style="margin: 20px; padding: 0; font-size: 12px; font-family: Arial, sans-serif; font-weight: 400; background-color: #f4f4f4;">
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+<body style="margin: 0; padding: 0; font-size: 16px; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #1f2937; background-color: #f3f4f6;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f3f4f6;">
         <tr>
-            <td align="center">
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 460px; background-color: #ffffff; padding: 20px; margin: 0; box-sizing: border-box;">
+            <td align="center" style="padding: 32px 16px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="max-width: 560px; width: 100%; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);">
                     <!-- Header -->
                     <tr>
-                        <td valign="top" height="80">{{.ServiceName}}</td>
+                        <td style="padding: 28px 32px 24px 32px; background-color: #4f46e5;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 20px; font-weight: 600; color: #ffffff; letter-spacing: -0.02em;">EZ-AUTH Authentication System</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
                     <!-- Content -->
                     <tr>
-                        <td>{{template "content" .}}</td>
+                        <td style="padding: 32px;">
+                            <div style="font-size: 15px; color: #374151; line-height: 1.65;">
+                                {{template "content" .}}
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 20px 32px 28px 32px; border-top: 1px solid #e5e7eb;">
+                            <p style="margin: 0; font-size: 12px; color: #9ca3af;">This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it.</p>
+                            <p style="margin: 8px 0 0 0; font-size: 12px; color: #9ca3af;">© 2026 KAONI CO., LTD.</p>
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -29,5 +58,17 @@
 {{end}}
 
 {{define "code"}}
-<div style="font-size: 34px; font-weight: 500; letter-spacing: 3.4px; margin: 20px 0 20px 0;">{{.}}</div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 24px 0;">
+    <tr>
+        <td align="center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
+                <tr>
+                    <td style="padding: 16px 28px; background-color: #f5f3ff; border: 1px solid #e9e7ff; border-radius: 10px;">
+                        <span style="font-size: 28px; font-weight: 700; font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace; letter-spacing: 0.35em; color: #4f46e5;">{{.}}</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 {{end}}
