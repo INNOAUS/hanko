@@ -36,3 +36,10 @@ subject_email_registration_attempted:
 email_registration_attempted_text:
   description: "Notifies the recipient that either they or someone else attempted to register for a specific service using an email address that is already in use."
   other: "আপনি বা অন্য কেউ {{ .ServiceName }} এর জন্য একটি ইমেল নিবন্ধন করার চেষ্টা করেছেন, কিন্তু প্রদত্ত ইমেল ঠিকানা ইতিমধ্যেই নিবন্ধিত। দয়া করে তার পরিবর্তে লগইন করার চেষ্টা করুন।"
+
+mail_product_name:
+  other: "EZ-AUTH Authentication System"
+mail_footer_sent_by:
+  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+mail_copyright:
+  other: "© 2026 KAONI CO., LTD."

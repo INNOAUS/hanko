@@ -37,3 +37,14 @@ email_registration_attempted_text:
   description: "Notifies the recipient that either they or someone else attempted to register for a specific service using an email address that is already in use."
   other: "You or someone else tried to register an email for {{ .ServiceName }}, but the provided email address is already registered. Please try to log in instead."
 
+# Mail layout branding (product name, footer, copyright) — load from data, no source change needed
+mail_product_name:
+  description: "Product name shown in email header"
+  other: "EZ-AUTH Authentication System"
+mail_footer_sent_by:
+  description: "Footer line: sent by product name"
+  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+mail_copyright:
+  description: "Copyright line in email footer"
+  other: "© 2026 KAONI CO., LTD."
+

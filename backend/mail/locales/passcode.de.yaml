@@ -37,3 +37,9 @@ email_registration_attempted_text:
   description: "Notifies the recipient that either they or someone else attempted to register for a specific service using an email address that is already in use."
   other: "Sie oder eine andere Person haben versucht, eine E-Mail für {{ .ServiceName }} zu registrieren, aber die angegebene E-Mail-Adresse ist bereits registriert. Bitte versuchen Sie stattdessen, sich anzumelden."
 
+mail_product_name:
+  other: "EZ-AUTH Authentication System"
+mail_footer_sent_by:
+  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+mail_copyright:
+  other: "© 2026 KAONI CO., LTD."

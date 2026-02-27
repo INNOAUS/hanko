@@ -36,3 +36,14 @@ subject_email_registration_attempted:
 email_registration_attempted_text:
   description: ""
   other: "당신 또는 다른 사용자가 {{ .ServiceName }}에 이미 등록된 이메일로 가입을 시도했습니다. 로그인을 시도해 주세요."
+
+# 메일 레이아웃 브랜딩 (제품명, 푸터, 저작권) — 데이터에서 로드, 소스 수정 없이 변경 가능
+mail_product_name:
+  description: "이메일 헤더에 표시할 제품명"
+  other: "EZ-AUTH Authentication System"
+mail_footer_sent_by:
+  description: "푸터 문구: 발신 서비스 안내"
+  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+mail_copyright:
+  description: "이메일 푸터 저작권 문구"
+  other: "© 2026 KAONI CO., LTD."
