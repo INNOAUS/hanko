@@ -37,9 +37,13 @@ email_registration_attempted_text:
   description: "通知收件人，他们或其他人试图使用已注册的电子邮件地址为特定服务注册。"
   other: "您或其他人试图为 {{ .ServiceName }} 注册电子邮件，但提供的电子邮件地址已被注册。请尝试登录。"
 
+# 邮件版式（产品名、页脚、版权）
 mail_product_name:
-  other: "EZ-AUTH Authentication System"
+  description: "邮件页眉显示的产品名"
+  other: "EZ-AUTH 认证系统"
 mail_footer_sent_by:
-  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+  description: "页脚：发件说明"
+  other: "本邮件由 EZ-AUTH 认证系统发送。若非您本人操作，请忽略此邮件。"
 mail_copyright:
+  description: "邮件页脚版权"
   other: "© 2026 KAONI CO., LTD."
