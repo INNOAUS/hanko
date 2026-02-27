@@ -1,0 +1,49 @@
+login_text:
+  description: "ログイン（パスコード）メール本文"
+  other: "以下の認証コードを入力して本人確認を行ってください。"
+ttl_text:
+  description: "パスコード有効時間の案内"
+  other: "このコードは {{ .TTL }} 分間有効です。"
+email_subject_login:
+  description: ""
+  other: "{{ .ServiceName }} 認証コード: {{ .Code }}"
+subject_email_verification:
+  description: ""
+  other: "メール認証コード: {{ .Code }}"
+subject_login:
+  description: ""
+  other: "ログイン認証コード: {{ .Code }}"
+subject_recovery:
+  description: ""
+  other: "パスワード再設定認証コード: {{ .Code }}"
+email_verification_text:
+  description: ""
+  other: "メールアドレス認証のため、以下の認証コードを入力してください。"
+recovery_text:
+  description: "パスワード再設定メール本文"
+  other: "パスワード再設定のため、ログイン画面で以下のコードを入力してください。"
+
+subject_email_login_attempted:
+  description: "ログイン試行通知の件名"
+  other: "未登録のメールアドレスでログインが試行されました"
+email_login_attempted_text:
+  description: ""
+  other: "あなたまたは他の方が {{ .ServiceName }} へのログインを試みましたが、このメールアドレスは登録されていません。まず会員登録を行ってください。"
+
+subject_email_registration_attempted:
+  description: "会員登録試行通知の件名"
+  other: "既に使用中のメールアドレスで登録が試行されました"
+email_registration_attempted_text:
+  description: ""
+  other: "あなたまたは他の方が {{ .ServiceName }} に既に登録済みのメールアドレスで登録を試みました。ログインをお試しください。"
+
+# メールレイアウト（製品名、フッター、著作権）
+mail_product_name:
+  description: "メールヘッダーに表示する製品名"
+  other: "EZ-AUTH 認証システム"
+mail_footer_sent_by:
+  description: "フッター: 送信元案内"
+  other: "このメールは EZ-AUTH 認証システムから送信されました。心当たりがない場合は無視して問題ありません。"
+mail_copyright:
+  description: "メールフッターの著作権表記"
+  other: "© 2026 KAONI CO., LTD."
