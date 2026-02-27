@@ -40,10 +40,10 @@ email_registration_attempted_text:
 # 메일 레이아웃 브랜딩 (제품명, 푸터, 저작권) — 데이터에서 로드, 소스 수정 없이 변경 가능
 mail_product_name:
   description: "이메일 헤더에 표시할 제품명"
-  other: "EZ-AUTH Authentication System"
+  other: "EZ-AUTH 인증 시스템"
 mail_footer_sent_by:
   description: "푸터 문구: 발신 서비스 안내"
-  other: "This email was sent by EZ-AUTH Authentication System. If you didn't request this, you can safely ignore it."
+  other: "이 이메일은 EZ-AUTH 인증 시스템에서 발송되었습니다. 요청하신 내용이 아니었다면 무시하셔도 됩니다."
 mail_copyright:
   description: "이메일 푸터 저작권 문구"
   other: "© 2026 KAONI CO., LTD."
