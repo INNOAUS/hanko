@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/gobuffalo/pop/v6"
 	"github.com/gofrs/uuid"
@@ -47,7 +48,12 @@ func NewSecurityNotificationService(cfg config.Config, emailService Email, persi
 }
 
 func (s securityNotification) SendNotification(tx *pop.Connection, p SendSecurityNotificationParams) error {
-	language := p.HttpContext.Request().Header.Get("X-Language")
+	req := p.HttpContext.Request()
+	language := resolveMailLanguage(
+		req.Header.Get("Accept-Language"),
+		req.Header.Get("X-Language"),
+		s.cfg.Service.DefaultMailLocale,
+	)
 
 	subject := s.emailService.RenderSubject(language, p.Template, map[string]interface{}{
 		"ServiceName": s.cfg.Service.Name,
@@ -126,4 +132,33 @@ func (s securityNotification) SendNotification(tx *pop.Connection, p SendSecurit
 	}
 
 	return nil
+}
+
+// resolveMailLanguage returns the language for mail templates: Accept-Language (first tag) > X-Language > config default > "en".
+func resolveMailLanguage(acceptLanguage, xLanguage, defaultLocale string) string {
+	lang := strings.TrimSpace(acceptLanguage)
+	if lang != "" {
+		if idx := strings.Index(lang, ","); idx > 0 {
+			lang = strings.TrimSpace(lang[:idx])
+		}
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" && strings.TrimSpace(xLanguage) != "" {
+		lang = strings.TrimSpace(xLanguage)
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" && strings.TrimSpace(defaultLocale) != "" {
+		lang = strings.TrimSpace(defaultLocale)
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" {
+		lang = "en"
+	}
+	return lang
 }

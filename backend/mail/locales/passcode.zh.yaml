@@ -1,0 +1,10 @@
+# ezauth-admin 로케일 "zh"용 레이아웃 키 (헤더/푸터). 본문은 security-notifications.zh.yaml 사용.
+mail_product_name:
+  description: "邮件页眉显示的产品名"
+  other: "EZ-AUTH 认证系统"
+mail_footer_sent_by:
+  description: "页脚：发件说明"
+  other: "本邮件由 EZ-AUTH 认证系统发送。若非您本人操作，请忽略此邮件。"
+mail_copyright:
+  description: "邮件页脚版权"
+  other: "© 2026 KAONI CO., LTD."

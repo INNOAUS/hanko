@@ -1,0 +1,48 @@
+password_update_text:
+  description: ""
+  other: "{{ .ServiceName }} アカウントのパスワードが更新されました。"
+subject_password_update:
+  description: ""
+  other: "パスワードが更新されました"
+
+primary_email_update_text:
+  description: ""
+  other: "{{ .ServiceName }} アカウントのメールアドレスが {{ .OldEmailAddress }} から {{ .NewEmailAddress }} に変更されました。"
+subject_primary_email_update:
+  description: ""
+  other: "メールアドレスが変更されました"
+
+email_create_text:
+  description: ""
+  other: "{{ .NewEmailAddress }} が {{ .ServiceName }} アカウントに追加されました。"
+subject_email_create:
+  description: ""
+  other: "新しいメールアドレスが追加されました"
+
+email_delete_text:
+  description: ""
+  other: "{{ .DeletedEmailAddress }} が {{ .ServiceName }} アカウントから削除されました。"
+subject_email_delete:
+  description: ""
+  other: "メールアドレスが削除されました"
+
+passkey_create_text:
+  description: ""
+  other: "{{ .ServiceName }} アカウントに新しいパスキーが追加されました。"
+subject_passkey_create:
+  description: ""
+  other: "新しいパスキーが追加されました"
+
+mfa_create_text:
+  description: ""
+  other: "{{ .ServiceName }} アカウントに新しい多要素認証（MFA）が追加されました。"
+subject_mfa_create:
+  description: ""
+  other: "新しいMFAが追加されました"
+
+mfa_delete_text:
+  description: ""
+  other: "{{ .ServiceName }} アカウントから既存の多要素認証（MFA）が削除されました。"
+subject_mfa_delete:
+  description: ""
+  other: "MFAが削除されました"

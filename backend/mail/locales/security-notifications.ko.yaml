@@ -1,0 +1,48 @@
+password_update_text:
+  description: ""
+  other: "{{ .ServiceName }} 계정의 비밀번호가 변경되었습니다."
+subject_password_update:
+  description: ""
+  other: "비밀번호가 변경되었습니다"
+
+primary_email_update_text:
+  description: ""
+  other: "{{ .ServiceName }} 계정의 기본 이메일 주소가 {{ .OldEmailAddress }}에서 {{ .NewEmailAddress }}(으)로 변경되었습니다."
+subject_primary_email_update:
+  description: ""
+  other: "기본 이메일 주소가 변경되었습니다"
+
+email_create_text:
+  description: ""
+  other: "{{ .NewEmailAddress }} 이메일 주소가 {{ .ServiceName }} 계정에 추가되었습니다."
+subject_email_create:
+  description: ""
+  other: "새 이메일 주소가 추가되었습니다"
+
+email_delete_text:
+  description: ""
+  other: "{{ .DeletedEmailAddress }} 이메일 주소가 {{ .ServiceName }} 계정에서 삭제되었습니다."
+subject_email_delete:
+  description: ""
+  other: "이메일 주소가 삭제되었습니다"
+
+passkey_create_text:
+  description: ""
+  other: "{{ .ServiceName }} 계정에 새 패스키가 추가되었습니다."
+subject_passkey_create:
+  description: ""
+  other: "새 패스키가 추가되었습니다"
+
+mfa_create_text:
+  description: ""
+  other: "{{ .ServiceName }} 계정에 새로운 다단계 인증(MFA) 방법이 추가되었습니다."
+subject_mfa_create:
+  description: ""
+  other: "새 MFA 방법이 추가되었습니다"
+
+mfa_delete_text:
+  description: ""
+  other: "{{ .ServiceName }} 계정에서 기존 다단계 인증(MFA) 방법이 제거되었습니다."
+subject_mfa_delete:
+  description: ""
+  other: "MFA 방법이 제거되었습니다"
