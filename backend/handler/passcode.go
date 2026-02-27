@@ -191,7 +191,21 @@ func (h *PasscodeHandler) Init(c echo.Context) error {
 		"TTL":         fmt.Sprintf("%.0f", durationTTL.Minutes()),
 	}
 
-	lang := c.Request().Header.Get("Accept-Language")
+	lang := strings.TrimSpace(c.Request().Header.Get("Accept-Language"))
+	if lang != "" {
+		if idx := strings.Index(lang, ","); idx > 0 {
+			lang = strings.TrimSpace(lang[:idx])
+		}
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" && h.serviceConfig.DefaultMailLocale != "" {
+		lang = h.serviceConfig.DefaultMailLocale
+	}
+	if lang == "" {
+		lang = "en"
+	}
 
 	subject := h.renderer.Translate(lang, "email_subject_login", data)
 	data["Subject"] = subject

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/gofrs/uuid"
@@ -68,10 +69,16 @@ func (h SendPasscode) Execute(c flowpilot.HookExecutionContext) error {
 	passcodeTemplate := c.Stash().Get(shared.StashPathPasscodeTemplate).String()
 
 	if !passcodeIsValid || isDifferentEmailAddress {
+		req := deps.HttpContext.Request()
+		lang := resolveMailLanguage(
+			req.Header.Get("Accept-Language"),
+			req.Header.Get("X-Language"),
+			deps.Cfg.Service.DefaultMailLocale,
+		)
 		sendParams := services.SendPasscodeParams{
 			Template:     passcodeTemplate,
 			EmailAddress: c.Stash().Get(shared.StashPathEmail).String(),
-			Language:     deps.HttpContext.Request().Header.Get("X-Language"),
+			Language:     lang,
 		}
 
 		passcodeResult, err := deps.PasscodeService.SendPasscode(deps.Tx, sendParams)
@@ -124,4 +131,33 @@ func (h SendPasscode) Execute(c flowpilot.HookExecutionContext) error {
 	}
 
 	return nil
+}
+
+// resolveMailLanguage returns the language for mail templates: Accept-Language (first tag) > X-Language > config default > "en".
+func resolveMailLanguage(acceptLanguage, xLanguage, defaultLocale string) string {
+	lang := strings.TrimSpace(acceptLanguage)
+	if lang != "" {
+		if idx := strings.Index(lang, ","); idx > 0 {
+			lang = strings.TrimSpace(lang[:idx])
+		}
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" && strings.TrimSpace(xLanguage) != "" {
+		lang = strings.TrimSpace(xLanguage)
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" && strings.TrimSpace(defaultLocale) != "" {
+		lang = strings.TrimSpace(defaultLocale)
+		if idx := strings.Index(lang, "-"); idx > 0 {
+			lang = lang[:idx]
+		}
+	}
+	if lang == "" {
+		lang = "en"
+	}
+	return lang
 }

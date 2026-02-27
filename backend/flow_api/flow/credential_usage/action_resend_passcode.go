@@ -58,10 +58,16 @@ func (a ReSendPasscode) Execute(c flowpilot.ExecutionContext) error {
 
 	passcodeTemplate := c.Stash().Get(shared.StashPathPasscodeTemplate).String()
 
+	req := deps.HttpContext.Request()
+	lang := resolveMailLanguage(
+		req.Header.Get("Accept-Language"),
+		req.Header.Get("X-Language"),
+		deps.Cfg.Service.DefaultMailLocale,
+	)
 	sendParams := services.SendPasscodeParams{
 		Template:     passcodeTemplate,
 		EmailAddress: c.Stash().Get(shared.StashPathEmail).String(),
-		Language:     deps.HttpContext.Request().Header.Get("X-Language"),
+		Language:     lang,
 	}
 	passcodeResult, err := deps.PasscodeService.SendPasscode(deps.Tx, sendParams)
 	if err != nil {
