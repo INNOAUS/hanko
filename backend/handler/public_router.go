@@ -33,7 +33,8 @@ func NewPublicRouter(cfg *config.Config, persister persistence.Persister, promet
 
 	auditLogger := auditlog.NewLogger(persister, cfg.AuditLog)
 
-	emailService, _ := services.NewEmailService(*cfg)
+	mailTemplate, _ := config.LoadMailTemplateFile(cfg.Service.MailTemplateFile)
+	emailService, _ := services.NewEmailService(*cfg, mailTemplate)
 	passcodeService := services.NewPasscodeService(*cfg, *emailService, persister)
 	passwordService := services.NewPasswordService(persister)
 	webauthnService := services.NewWebauthnService(*cfg, persister)
@@ -207,7 +208,7 @@ func NewPublicRouter(cfg *config.Config, persister persistence.Persister, promet
 
 	// 이메일 인증(패스코드) 라우트: MFA 비활성 시 로그인용, MFA 활성 시에도 회원가입 이메일 검증(require_verification)용으로 필요
 	if cfg.Email.Enabled && cfg.Email.UseForAuthentication {
-		passcodeHandler, err := NewPasscodeHandler(cfg, persister, sessionManager, mailer, auditLogger)
+		passcodeHandler, err := NewPasscodeHandler(cfg, persister, sessionManager, mailer, auditLogger, mailTemplate)
 		if err != nil {
 			panic(fmt.Errorf("failed to create public passcode handler: %w", err))
 		}

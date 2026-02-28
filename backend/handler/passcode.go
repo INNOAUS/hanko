@@ -36,6 +36,7 @@ type PasscodeHandler struct {
 	persister         persistence.Persister
 	emailConfig       config.EmailDelivery
 	serviceConfig     config.Service
+	mailTemplate      *config.MailTemplateConfig
 	TTL               int
 	sessionManager    session.Manager
 	cfg               *config.Config
@@ -45,8 +46,28 @@ type PasscodeHandler struct {
 
 var maxPasscodeTries = 3
 
-func NewPasscodeHandler(cfg *config.Config, persister persistence.Persister, sessionManager session.Manager, mailer mail.Mailer, auditLogger auditlog.Logger) (*PasscodeHandler, error) {
-	renderer, err := mail.NewRenderer()
+// injectMailBrandingData adds mail_template.yaml branding for lang to template data when set.
+// ServiceName is set to product_name so body text shows the same product name as the header.
+func injectMailBrandingData(data map[string]interface{}, lang string, tmpl *config.MailTemplateConfig) {
+	if data == nil || tmpl == nil {
+		return
+	}
+	b := tmpl.BrandingForLang(lang)
+	if strings.TrimSpace(b.ProductName) != "" {
+		data["MailProductName"] = b.ProductName
+		data["ServiceName"] = b.ProductName
+	}
+	if strings.TrimSpace(b.FooterSentBy) != "" {
+		data["MailFooterSentBy"] = b.FooterSentBy
+	}
+	if strings.TrimSpace(b.Copyright) != "" {
+		data["MailCopyright"] = b.Copyright
+	}
+}
+
+func NewPasscodeHandler(cfg *config.Config, persister persistence.Persister, sessionManager session.Manager, mailer mail.Mailer, auditLogger auditlog.Logger, mailTemplate *config.MailTemplateConfig) (*PasscodeHandler, error) {
+	store := mail.NewMailTemplateStoreFromConfig(mailTemplate)
+	renderer, err := mail.NewRenderer(store)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create new renderer: %w", err)
 	}
@@ -61,6 +82,7 @@ func NewPasscodeHandler(cfg *config.Config, persister persistence.Persister, ses
 		persister:         persister,
 		emailConfig:       cfg.EmailDelivery,
 		serviceConfig:     cfg.Service,
+		mailTemplate:      mailTemplate,
 		TTL:               cfg.Email.PasscodeTtl,
 		sessionManager:    sessionManager,
 		cfg:               cfg,
@@ -206,6 +228,8 @@ func (h *PasscodeHandler) Init(c echo.Context) error {
 	if lang == "" {
 		lang = "en"
 	}
+
+	injectMailBrandingData(data, lang, h.mailTemplate)
 
 	subject := h.renderer.Translate(lang, "email_subject_login", data)
 	data["Subject"] = subject

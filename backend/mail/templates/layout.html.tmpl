@@ -28,7 +28,7 @@
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                                 <tr>
                                     <td>
-                                        <span style="font-size: 20px; font-weight: 600; color: #ffffff; letter-spacing: -0.02em;">{{t "mail_product_name" .}}</span>
+                                        <span style="font-size: 20px; font-weight: 600; color: #ffffff; letter-spacing: -0.02em;">{{if .MailProductName}}{{.MailProductName}}{{else}}{{t "mail_product_name" .}}{{end}}</span>
                                     </td>
                                 </tr>
                             </table>
@@ -45,8 +45,8 @@
                     <!-- Footer -->
                     <tr>
                         <td style="padding: 20px 32px 28px 32px; border-top: 1px solid #e5e7eb;">
-                            <p style="margin: 0; font-size: 12px; color: #9ca3af;">{{t "mail_footer_sent_by" .}}</p>
-                            <p style="margin: 8px 0 0 0; font-size: 12px; color: #9ca3af;">{{t "mail_copyright" .}}</p>
+                            <p style="margin: 0; font-size: 12px; color: #9ca3af;">{{if .MailFooterSentBy}}{{.MailFooterSentBy}}{{else}}{{t "mail_footer_sent_by" .}}{{end}}</p>
+                            <p style="margin: 8px 0 0 0; font-size: 12px; color: #9ca3af;">{{if .MailCopyright}}{{.MailCopyright}}{{else}}{{t "mail_copyright" .}}{{end}}</p>
                         </td>
                     </tr>
                 </table>
